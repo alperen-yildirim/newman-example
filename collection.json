@@ -1,0 +1,118 @@
+{
+	"info": {
+		"_postman_id": "4ea876b4-2dbd-461f-ae81-ba03d0c09e69",
+		"name": "ExampleJson",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26015437"
+	},
+	"item": [
+		{
+			"name": "Todos",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = null",
+							"pm.test('Verify that status is OK with todos', () => {",
+							"    res = pm.response;",
+							"    pm.expect(res.status).to.eql('OK')",
+							"})",
+							"",
+							"pm.test('Verify each todo in response body has \"title\" and \"completed\" props', () => {",
+							"    const todos = [...res.json()]",
+							"    todos.forEach(todo => {",
+							"        pm.expect(todo.title).to.exist",
+							"        pm.expect(todo.completed).to.exist",
+							"    })",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/todos",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"todos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Posts",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let res = null",
+							"pm.test('Verify that status is OK with posts and they have title and body properties', () => {",
+							"    res = pm.response;",
+							"    pm.expect(res.status).to.eql('OK')",
+							"})",
+							"",
+							"pm.test('Verify each post in response body has \"title\" and \"body\" props', () => {",
+							"    const posts = [...res.json()]",
+							"    posts.forEach(post => {",
+							"        pm.expect(post.title).to.exist",
+							"        pm.expect(post.body).to.exist",
+							"    })",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/posts",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"posts"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "https://jsonplaceholder.typicode.com",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}
